@@ -1,16 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 // context
 import { MovieContext } from '../../context/movie.context'
+// payment model
+import PaymentModal from '../PaymentModel/payment.component'
 
 const MovieInfo = () => {
   const {movie} = useContext(MovieContext)
 
+  const [open,setIsOpen] = useState(false);
+  const [price,setPrice] = useState(0);
+
 //   for genres and converts to string
-const genres = movie.genres?.map((item)=> item.name).join(", ")
-const ln = movie.spoken_languages?.map((item)=> item.name).join(", ")
+    const genres = movie.genres?.map((item)=> item.name).join(", ")
+    const ln = movie.spoken_languages?.map((item)=> item.name).join(", ")
+   
+    const rentMovie = ()=>{
+        setIsOpen(true);
+        setPrice(89);
+    }
+    const buyMovie = ()=>{
+        setIsOpen(true);
+        setPrice(449);
+    }
 
     return (
+        <>
+        <PaymentModal isOpen={open} setIsOpen={setIsOpen} price={price} />
         <div className='flex flex-col gap-4'>
             <div className='flex items-center gap-3'>
                 <div className='w-28 h-6'>
@@ -26,12 +42,13 @@ const ln = movie.spoken_languages?.map((item)=> item.name).join(", ")
                     <h4>{(movie.runtime/60).toFixed(2)} hr &bull; {genres} &bull; 13+  </h4>
                 </div>
                 <div className='flex items-center gap-3'>
-                    <button className='bg-bmssecondary-300 px-14 py-3 text-white font-semibold rounded-lg'>Rent ₹89</button>
-                    <button className='bg-bmssecondary-300 px-14 py-3 text-white font-semibold rounded-lg'>Buy ₹449</button>
+                    <button onClick={rentMovie} className='bg-bmssecondary-300 px-14 py-3 text-white font-semibold rounded-lg'>Rent ₹89</button>
+                    <button onClick={buyMovie} className='bg-bmssecondary-300 px-14 py-3 text-white font-semibold rounded-lg'>Buy ₹449</button>
                 </div>
             </div>
 
         </div>
+        </>
     )
 }
 

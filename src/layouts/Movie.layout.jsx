@@ -2,7 +2,7 @@ import React,{useEffect,useContext} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 // movie navbar
-import Movienavbar from '../components/Navbar/Movie.navbar'
+import Movienavbar from '../components/Navbar/movie.navbar'
 // footer
 import Footer from '../components/Footer/Footer'
 
